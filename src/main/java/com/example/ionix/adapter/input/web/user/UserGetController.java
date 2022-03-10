@@ -7,6 +7,8 @@ import com.example.ionix.entity.user.request.PagedUsersRequest;
 import com.example.ionix.entity.user.response.PagedUsersResponse;
 import io.reactivex.rxjava3.core.Single;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,7 +47,8 @@ public class UserGetController {
   @GetMapping(value = "/user", produces = {MediaType.APPLICATION_JSON_VALUE})
   @Operation(summary = "Get User info", description = "Get user information")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponse(responseCode = "200", description = "Successful operation",
+      content = {@Content(schema = @Schema(implementation = PagedUsersRestResponse.class))})
   })
   public Single<PagedUsersRestResponse> getUserInformation(@Valid PagedUsersRestRequest pagedUsersRestRequest) {
     log.info("Starting UserGetController.getUserInformation method");

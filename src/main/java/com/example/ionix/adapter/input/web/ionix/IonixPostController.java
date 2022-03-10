@@ -5,6 +5,8 @@ import com.example.ionix.domain.port.input.IonixUseCase;
 import com.example.ionix.entity.ionix.response.IonixResponse;
 import io.reactivex.rxjava3.core.Single;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,7 +40,8 @@ public class IonixPostController {
   @PostMapping(value = "/ionix", produces = {MediaType.APPLICATION_JSON_VALUE})
   @Operation(summary = "Ionix Post", description = "Get Ionix service information")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponse(responseCode = "200", description = "Successful operation",
+      content = {@Content(schema = @Schema(implementation = IonixRestResponse.class))})
   })
   public Single<IonixRestResponse> saveUserInformation(@RequestParam String rut) {
     log.info("Starting IonixPostController.saveUserInformation method");
